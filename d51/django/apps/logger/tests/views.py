@@ -1,3 +1,4 @@
+import datetime
 from django.core.urlresolvers import reverse
 from django.test import TestCase
 from django.test.client import Client
@@ -24,5 +25,11 @@ class TestOfHitView(TestCase):
 
         hit = Hit.objects.get(url=url)
 
+    def test_stores_current_time(self):
+        url = random_url()
+        response = Client().get(build_hit_url(url))
+        hit = Hit.objects.get(url=url)
 
-        
+        self.assert_(isinstance(hit.created_on, datetime.datetime))
+        self.assert_((datetime.datetime.now() - hit.created_on).seconds < 1,
+            "Check creation time, might fail on slow machines/network connections.")
