@@ -1,10 +1,10 @@
 from django.core.urlresolvers import reverse
 from django import template
-from ..views import hit
+from d51.django.apps.logger.views import hit
 
 register = template.Library()
 
-class HitLoggerNode(object):
+class HitLoggerNode(template.Node):
     def __init__(self, url):
         self.url = url
 
