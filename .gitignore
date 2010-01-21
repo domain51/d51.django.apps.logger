@@ -1,0 +1,6 @@
+bin/*
+include/*
+lib/*
+.*.swp
+*.py[co]
+src/*
