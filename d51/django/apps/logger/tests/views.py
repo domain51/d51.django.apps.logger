@@ -33,3 +33,11 @@ class TestOfHitView(TestCase):
         self.assert_(isinstance(hit.created_on, datetime.datetime))
         self.assert_((datetime.datetime.now() - hit.created_on).seconds < 1,
             "Check creation time, might fail on slow machines/network connections.")
+
+    def test_redirects_to_url(self):
+        url = random_url()
+        response = Client().get(build_hit_url(url))
+        self.assertEquals(response.status_code, 302)
+        # TODO: refactor this - we can't use assertRedirect() because it
+        #       tries to load crap, but this test should be simplified
+        self.assertEquals(response._headers['location'][1], url, "ensure redirection took place")

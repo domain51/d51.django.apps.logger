@@ -1,7 +1,7 @@
-from django.http import HttpResponse
+from django.http import HttpResponseRedirect
 
 from .models import Hit
 
 def hit(request, url):
     hit = Hit.objects.create(url=url)
-    return HttpResponse()
+    return HttpResponseRedirect(url)
