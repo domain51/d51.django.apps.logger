@@ -18,6 +18,7 @@ class HitLoggerNode(template.Node):
             context[self.context_name] = url
         else:
             return url
+        return ''
 
 @register.tag('log_hit')
 def do_log_hit(parser, token):
