@@ -16,9 +16,9 @@ class HitLoggerNode(template.Node):
         url = reverse(hit, kwargs={"url": self.url})
         if self.context_name:
             context[self.context_name] = url
+            return ''
         else:
             return url
-        return ''
 
 @register.tag('log_hit')
 def do_log_hit(parser, token):
