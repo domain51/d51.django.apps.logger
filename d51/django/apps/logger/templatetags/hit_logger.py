@@ -1,7 +1,6 @@
 from django.core.urlresolvers import reverse
 from django import template
 from d51.django.apps.logger.views import hit
-import urllib
 
 register = template.Library()
 
@@ -17,7 +16,7 @@ class HitLoggerNode(template.Node):
             # assume we have a variable
             self.url = template.Variable(self.url).resolve(context)
         if not 'url' in self.view_kwargs:
-            self.view_kwargs['url'] = urllib.urlencode({'': self.url})[1:]
+            self.view_kwargs['url'] = self.url
         url = reverse(self.hit_view, kwargs=self.view_kwargs)
 
         if self.context_name:
